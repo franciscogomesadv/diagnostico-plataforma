@@ -1,0 +1,24 @@
+{
+  "name": "diagnostico-backend",
+  "version": "0.1.0",
+  "description": "Backend API para plataforma de diagnóstico de governança documental",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["governance", "compliance", "api"],
+  "author": "Clara Associados",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "bcrypt": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

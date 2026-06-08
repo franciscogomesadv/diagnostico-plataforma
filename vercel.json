@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "env": {
+    "VITE_API_URL": "https://diagnostico-backend.railway.app",
+    "VITE_GOOGLE_CLIENT_ID": "demo-client-id"
+  }
+}

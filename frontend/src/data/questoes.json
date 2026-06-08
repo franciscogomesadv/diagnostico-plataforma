@@ -1,0 +1,101 @@
+{
+  "bloco_0": {
+    "titulo": "Bloco 0 - Core da Empresa",
+    "descricao": "Fundação única para os 3 documentos",
+    "secoes": [
+      {
+        "numero": "0.1",
+        "titulo": "Identificação jurídica e societária",
+        "perguntas": [
+          {"id": "0.1.1", "titulo": "Razão social", "descricao": "Qual é o nome oficial (razão social) da empresa?", "tipo": "aberta", "placeholder": "Ex: Clara Associados LTDA", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.1.2", "titulo": "Nome fantasia", "descricao": "Qual é o nome comercial (fantasia) da empresa?", "tipo": "aberta", "placeholder": "Ex: Clara", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.1.3", "titulo": "CNPJ", "descricao": "Qual é o número do CNPJ?", "tipo": "aberta", "placeholder": "XX.XXX.XXX/XXXX-XX", "consome": ["REG"]},
+          {"id": "0.1.4", "titulo": "Natureza jurídica", "descricao": "Qual é a natureza jurídica?", "tipo": "escolha", "opcoes": ["LTDA", "S.A.", "EIRELI", "SLU", "MEI", "Cooperativa", "OSC-Terceiro Setor", "Outra"], "consome": ["COD", "REG"]},
+          {"id": "0.1.5", "titulo": "Porte da empresa", "descricao": "Qual é o porte?", "tipo": "escolha", "opcoes": ["MEI", "ME", "EPP", "Médio", "Grande"], "consome": ["COD", "REG", "POL"]},
+          {"id": "0.1.6", "titulo": "Data de constituição", "descricao": "Qual é a data de constituição?", "tipo": "data", "consome": ["REG"]},
+          {"id": "0.1.7", "titulo": "Composição societária", "descricao": "Descreva a composição societária (sócios/grupo)", "tipo": "aberta", "placeholder": "Ex: 2 sócios iguais", "consome": ["COD"]},
+          {"id": "0.1.8", "titulo": "Possui controle/holding?", "descricao": "Possui controle/holding ou é grupo econômico?", "tipo": "sim_nao", "consome": ["REG", "POL"]}
+        ]
+      },
+      {
+        "numero": "0.2",
+        "titulo": "Atividade econômica e regulação",
+        "perguntas": [
+          {"id": "0.2.1", "titulo": "CNAE principal", "descricao": "Qual é o código CNAE principal?", "tipo": "aberta", "placeholder": "Ex: 6912000", "consome": ["REG", "POL"]},
+          {"id": "0.2.2", "titulo": "CNAEs secundários", "descricao": "Quais são os CNAEs secundários?", "tipo": "multipla", "consome": ["REG", "POL"]},
+          {"id": "0.2.3", "titulo": "Descrição da atividade", "descricao": "Descreva em 2-3 frases o que a empresa faz", "tipo": "aberta", "placeholder": "Ex: Prestação de serviços jurídicos...", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.2.4", "titulo": "Setor econômico", "descricao": "Qual é o setor?", "tipo": "escolha", "opcoes": ["Indústria", "Comércio", "Serviços", "Tecnologia", "Saúde", "Financeiro", "Construção", "Agro", "Educação", "Logística", "Outro"], "consome": ["COD", "REG", "POL"]},
+          {"id": "0.2.5", "titulo": "Regulação setorial", "descricao": "A atividade é regulada por agência/órgão?", "tipo": "multipla", "opcoes": ["ANVISA", "BACEN", "CVM", "ANS", "ANEEL", "ANATEL", "Conselho profissional", "Nenhuma"], "gatilho": "Se não Nenhuma → prioriza Bloco Regulatório (Módulo C)", "consome": ["REG", "POL"]},
+          {"id": "0.2.6", "titulo": "Lida com dados pessoais?", "descricao": "Lida com dados pessoais de clientes em escala?", "tipo": "sim_nao", "gatilho": "Se Sim → prioriza Política LGPD", "consome": ["COD", "POL"]},
+          {"id": "0.2.7", "titulo": "Relação com setor público", "descricao": "Tem relacionamento com a Administração Pública?", "tipo": "sim_nao", "gatilho": "Se Sim → prioriza Política Anticorrupção", "consome": ["COD", "POL"]}
+        ]
+      },
+      {
+        "numero": "0.3",
+        "titulo": "Dimensão e estrutura de pessoal",
+        "perguntas": [
+          {"id": "0.3.1", "titulo": "Nº total de pessoas", "descricao": "Quantos colaboradores a empresa tem?", "tipo": "numero", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.3.2", "titulo": "Quebra por vínculo", "descricao": "Preencha a matriz de tipos de vínculo", "tipo": "matriz", "linhas": ["CLT efetivos", "Em experiência", "Estagiários", "Aprendizes", "Temporários", "PJ/autônomos", "Terceirizados", "Sócios/diretores"], "gatilho": "Estagiários>0 → Lei 11.788; Aprendizes>0 → CLT 428+", "consome": ["REG", "POL"]},
+          {"id": "0.3.3", "titulo": "Níveis hierárquicos", "descricao": "Descreva o organograma macro", "tipo": "aberta", "placeholder": "Ex: C-Level, Gestores, Operacional", "consome": ["COD", "REG"]},
+          {"id": "0.3.4", "titulo": "Possui filiais?", "descricao": "Possui filiais/unidades?", "tipo": "sim_nao", "consome": ["REG"]},
+          {"id": "0.3.5", "titulo": "Estados de atuação", "descricao": "Em quais estados/municípios atua?", "tipo": "multipla", "gatilho": "Se >1 estado → verificar múltiplas CCTs", "consome": ["REG"]},
+          {"id": "0.3.6", "titulo": "Regime de trabalho", "descricao": "Qual é o regime predominante?", "tipo": "escolha", "opcoes": ["Presencial", "Híbrido", "Remoto"], "gatilho": "Híbrido/Remoto → prioriza Política Home Office", "consome": ["REG", "POL"]},
+          {"id": "0.3.7", "titulo": "Trabalho em turnos?", "descricao": "Há trabalho em turnos/escalas?", "tipo": "sim_nao", "gatilho": "Se Sim → bloco escalas e adicional noturno", "consome": ["REG"]},
+          {"id": "0.3.8", "titulo": "Perfil da equipe", "descricao": "Descreva perfil etário/gênero/diversidade", "tipo": "aberta", "placeholder": "Ex: Maioria jovem, 60% mulheres", "consome": ["COD"]}
+        ]
+      },
+      {
+        "numero": "0.4",
+        "titulo": "Marco legal e normativo",
+        "perguntas": [
+          {"id": "0.4.1", "titulo": "Categoria sindical", "descricao": "Qual é a categoria profissional/sindicato?", "tipo": "aberta", "placeholder": "Ex: Categoria dos Advogados", "consome": ["REG"]},
+          {"id": "0.4.2", "titulo": "CCTs aplicáveis", "descricao": "Quais CCTs se aplicam?", "tipo": "multipla", "consome": ["REG"]},
+          {"id": "0.4.3", "titulo": "Acordo coletivo próprio?", "descricao": "Há acordo coletivo próprio (ACT)?", "tipo": "sim_nao", "consome": ["REG"]},
+          {"id": "0.4.4", "titulo": "NRs aplicáveis", "descricao": "Quais NRs se aplicam à operação?", "tipo": "multipla", "opcoes": ["NR-1", "NR-6 (EPI)", "NR-7 (PCMSO)", "NR-9 (PGR)", "NR-12 (máquinas)", "NR-17 (ergonomia)", "NR-32 (saúde)", "NR-35 (altura)", "Outras"], "gatilho": "Qualquer NR de risco → bloco SST + Política SST", "consome": ["REG", "POL"]},
+          {"id": "0.4.5", "titulo": "Legislações específicas", "descricao": "Quais legislações específicas do negócio se aplicam?", "tipo": "multipla", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.4.6", "titulo": "Certificações", "descricao": "Possui certificações (ISO, etc.)?", "tipo": "multipla", "consome": ["COD", "POL"]}
+        ]
+      },
+      {
+        "numero": "0.5",
+        "titulo": "Maturidade documental",
+        "perguntas": [
+          {"id": "0.5.1", "titulo": "Já possui Código?", "descricao": "Já possui Código de Conduta?", "tipo": "sim_nao", "consome": ["COD"]},
+          {"id": "0.5.2", "titulo": "Já possui Regimento?", "descricao": "Já possui Regimento Interno?", "tipo": "sim_nao", "consome": ["REG"]},
+          {"id": "0.5.3", "titulo": "Políticas existentes", "descricao": "Quais Políticas Internas já existem?", "tipo": "multipla", "consome": ["POL"]},
+          {"id": "0.5.4", "titulo": "Termo de ciência?", "descricao": "Há coleta de termo de ciência/aceite?", "tipo": "escolha", "opcoes": ["Sim", "Parcial", "Não"], "alerta": "Se não → lacuna", "consome": ["COD", "REG", "POL"]},
+          {"id": "0.5.5", "titulo": "Canal de denúncias?", "descricao": "Existe canal de denúncias ativo?", "tipo": "sim_nao", "consome": ["COD", "POL"]},
+          {"id": "0.5.6", "titulo": "Comitê de Ética?", "descricao": "Existe Comitê de Ética/Compliance?", "tipo": "sim_nao", "consome": ["COD", "POL"]},
+          {"id": "0.5.7", "titulo": "Onde documentos estão?", "descricao": "Onde os documentos ficam disponíveis?", "tipo": "escolha", "opcoes": ["Intranet", "Drive", "Sistema RH", "Mural", "Nenhum"], "consome": ["COD", "REG", "POL"]},
+          {"id": "0.5.8", "titulo": "Histórico de descumprimentos?", "descricao": "Há histórico de descumprimentos/reincidências?", "tipo": "aberta", "alerta": "Se sim → lacuna", "consome": ["REG", "POL"]}
+        ]
+      },
+      {
+        "numero": "0.6",
+        "titulo": "Cultura e liderança",
+        "perguntas": [
+          {"id": "0.6.1", "titulo": "Propósito da empresa", "descricao": "Por que a empresa existe (além do lucro)?", "tipo": "aberta", "placeholder": "Ex: Contribuir para a justiça acessível", "consome": ["COD"]},
+          {"id": "0.6.2", "titulo": "Valores fundamentais", "descricao": "3-5 palavras: crenças mais profundas", "tipo": "multipla", "consome": ["COD"]},
+          {"id": "0.6.3", "titulo": "Linhas vermelhas", "descricao": "Que comportamento seria traição aos valores?", "tipo": "multipla", "consome": ["COD"]},
+          {"id": "0.6.4", "titulo": "Visão (5 anos)", "descricao": "Como a empresa quer ser vista em 5 anos?", "tipo": "aberta", "consome": ["COD"]},
+          {"id": "0.6.5", "titulo": "Estilo de gestão", "descricao": "Qual é o estilo de gestão predominante?", "tipo": "aberta", "consome": ["COD", "REG"]},
+          {"id": "0.6.6", "titulo": "Liderança comunica ética?", "descricao": "A liderança comunica ética com frequência?", "tipo": "escala", "escala": [1, 2, 3, 4, 5], "alerta": "Se ≤2 → lacuna", "consome": ["COD"]},
+          {"id": "0.6.7", "titulo": "Gap discurso-prática", "descricao": "Há desconexão entre discurso e prática?", "tipo": "aberta", "alerta": "Se sim → lacuna", "consome": ["COD"]},
+          {"id": "0.6.8", "titulo": "Regras não escritas", "descricao": "Comportamentos 'não escritos' tolerados hoje", "tipo": "multipla", "consome": ["REG"]}
+        ]
+      },
+      {
+        "numero": "0.7",
+        "titulo": "Histórico e risco",
+        "perguntas": [
+          {"id": "0.7.1", "titulo": "Volume de reclamatórias", "descricao": "Volume de reclamatórias trabalhistas (últimos 3 anos)?", "tipo": "escolha", "opcoes": ["Nenhuma", "Baixo", "Médio", "Alto"], "consome": ["REG"]},
+          {"id": "0.7.2", "titulo": "Temas de litígio", "descricao": "Temas mais recorrentes nas ações", "tipo": "multipla", "opcoes": ["Horas extras", "Verbas", "Assédio", "Justa causa revertida", "Insalubridade", "Vínculo", "Outros"], "gatilho": "Cada tema reforça capítulo/política correspondente", "consome": ["REG", "POL"]},
+          {"id": "0.7.3", "titulo": "Incidente de assédio?", "descricao": "Já houve incidente de assédio/discriminação?", "tipo": "sim_nao", "gatilho": "Se Sim → Política Assédio = prioridade", "consome": ["COD", "POL"]},
+          {"id": "0.7.4", "titulo": "Incidente de dados?", "descricao": "Já houve vazamento/incidente de dados?", "tipo": "sim_nao", "consome": ["POL"]},
+          {"id": "0.7.5", "titulo": "Incidente de fraude?", "descricao": "Já houve fraude/desvio/corrupção?", "tipo": "sim_nao", "consome": ["COD", "POL"]},
+          {"id": "0.7.6", "titulo": "Risco crítico", "descricao": "Qual risco tira o sono do gestor? (manchete temida)", "tipo": "aberta", "placeholder": "Ex: Ação coletiva por horas extras", "consome": ["COD", "POL"]}
+        ]
+      }
+    ]
+  }
+}

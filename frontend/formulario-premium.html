@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico de Governança Documental — Francisco Gomes Advocacia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:wght@300;400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --marinho: #1B2A4A;
+      --ambar: #C9A84C;
+      --ambar-claro: #E8C96A;
+      --texto: #0F0F0F;
+      --texto-muted: #3A3A3A;
+      --metadata: #7A7A7A;
+      --fundo-caixa: #F4F3F0;
+      --fundo: #F7F5F0;
+      --separador: #EDECEA;
+    }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-color: var(--fundo);
+      color: var(--texto);
+      line-height: 1.8;
+    }
+
+    /* ========== HEADER PREMIUM ========== */
+    .header {
+      background: linear-gradient(135deg, var(--marinho) 0%, #0f1a2a 100%);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--ambar);
+      box-shadow: 0 8px 32px rgba(27, 42, 74, 0.15);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--ambar);
+      clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+      animation: pulse-subtle 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.05); }
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--ambar-claro);
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    .header p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--ambar);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .header-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ambar), transparent);
+      margin-top: 1.5rem;
+    }
+
+    .header-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+    }
+
+    /* ========== CONTAINER ========== */
+    .container {
+      max-width: 920px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    /* ========== BARRA DE PROGRESSO PREMIUM ========== */
+    .progress-section {
+      margin-bottom: 3rem;
+      background: white;
+      padding: 2rem;
+      border: 1px solid var(--separador);
+      border-left: 4px solid var(--ambar);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .progress-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--marinho);
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-button {
+      font-family: 'Inter', sans-serif;
+      padding: 0.6rem 1.2rem;
+      background: var(--marinho);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-button:hover {
+      background: #0f1a2a;
+      box-shadow: 0 4px 16px rgba(27, 42, 74, 0.25);
+    }
+
+    .progress-bar-container {
+      background: #e8e8e8;
+      height: 2px;
+      border-radius: 1px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--marinho), var(--ambar));
+      width: 40%;
+      transition: width 0.4s ease;
+    }
+
+    .progress-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--metadata);
+      letter-spacing: 0.5px;
+    }
+
+    /* ========== QUESTÕES ========== */
+    .questoes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .questao {
+      background: white;
+      border: 1px solid var(--separador);
+      border-left: 5px solid var(--marinho);
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    }
+
+    .questao:hover {
+      box-shadow: 0 6px 24px rgba(27, 42, 74, 0.1);
+    }
+
+    .questao.respondida {
+      border-left-color: var(--ambar);
+      background: linear-gradient(135deg, #fafaf9 0%, white 100%);
+    }
+
+    .questao-id {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      color: var(--marinho);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .questao-titulo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--texto);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .questao-descricao {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.95rem;
+      color: var(--texto-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .questao-input {
+      font-family: 'Source Serif 4', Georgia, serif;
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--separador);
+      background: var(--fundo-caixa);
+      color: var(--texto);
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .questao-input:focus {
+      outline: none;
+      border-color: var(--ambar);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+      background: white;
+    }
+
+    .questao-status {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    .questao-status.respondida {
+      color: #10b981;
+    }
+
+    .questao-status.nao-respondida {
+      color: #94a3b8;
+    }
+
+    /* ========== ALERTA DE GATILHO ========== */
+    .gatilho-alerta {
+      margin-top: 1.5rem;
+      padding: 1.2rem;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid var(--ambar);
+      border-left: 4px solid var(--ambar);
+      border-radius: 2px;
+    }
+
+    .gatilho-alerta strong {
+      color: var(--marinho);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gatilho-alerta p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #78350f;
+      line-height: 1.6;
+    }
+
+    /* ========== MATRIZ/TABELA ========== */
+    .questao-matriz {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .questao-matriz th {
+      background: var(--marinho);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .questao-matriz td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--separador);
+    }
+
+    .questao-matriz tr:nth-child(even) {
+      background: #fafaf9;
+    }
+
+    .questao-matriz input {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--separador);
+      background: white;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.9rem;
+      text-align: center;
+      border-radius: 2px;
+    }
+
+    /* ========== RADIO BUTTONS ========== */
+    .opcoes-radio {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .opcao-radio {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .opcao-radio input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--ambar);
+      border-radius: 50%;
+      cursor: pointer;
+      margin-right: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .opcao-radio input[type="radio"]:checked {
+      background: var(--ambar);
+      box-shadow: inset 0 0 0 3px white, 0 0 0 2px var(--ambar);
+    }
+
+    .opcao-radio label {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.95rem;
+      color: var(--texto);
+      cursor: pointer;
+      flex: 1;
+    }
+
+    /* ========== BOTÕES INFERIORES ========== */
+    .buttons-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--separador);
+    }
+
+    .btn {
+      padding: 1.2rem 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .btn-anterior {
+      background: #e5e7eb;
+      color: var(--marinho);
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-anterior:hover {
+      background: #d1d5db;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-proximo {
+      background: var(--marinho);
+      color: white;
+      grid-column: 2;
+    }
+
+    .btn-proximo:hover {
+      background: #0f1a2a;
+      box-shadow: 0 6px 20px rgba(27, 42, 74, 0.3);
+    }
+
+    .btn-salvar {
+      background: var(--ambar);
+      color: white;
+    }
+
+    .btn-salvar:hover {
+      background: #b8922d;
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+    }
+
+    /* ========== RESPONSIVO ========== */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.6rem;
+      }
+
+      .buttons-section {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-proximo {
+        grid-column: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER PREMIUM -->
+<div class="header">
+  <div class="logo-container">
+    <div class="logo-icon"></div>
+    <div>
+      <h1>FRANCISCO GOMES</h1>
+      <p>ADVOCACIA</p>
+    </div>
+  </div>
+  <div class="header-divider"></div>
+  <div class="header-meta">
+    OAB/SP 363.517 · Franca/SP · DIAGNÓSTICO DE GOVERNANÇA DOCUMENTAL
+  </div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="container">
+
+  <!-- PROGRESSO -->
+  <div class="progress-section">
+    <div class="progress-title">
+      <span>Questionário — Bloco 0 Core</span>
+      <button class="progress-button">← Voltar</button>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="progress-label">Progresso: 40% · Questão 7 de 51</div>
+  </div>
+
+  <!-- QUESTÕES -->
+  <div class="questoes-container">
+
+    <!-- Q1 -->
+    <div class="questao respondida">
+      <div class="questao-id">[0.1.1]</div>
+      <div class="questao-titulo">Razão Social</div>
+      <div class="questao-descricao">Qual é o nome oficial (razão social) da empresa?</div>
+      <input type="text" class="questao-input" value="Clara Associados LTDA" placeholder="Nome oficial da empresa">
+      <div class="questao-status respondida">✓ Respondido</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="questao respondida">
+      <div class="questao-id">[0.1.2]</div>
+      <div class="questao-titulo">Nome Fantasia</div>
+      <div class="questao-descricao">Qual é o nome comercial (fantasia) da empresa?</div>
+      <input type="text" class="questao-input" value="Clara" placeholder="Nome comercial">
+      <div class="questao-status respondida">✓ Respondido</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="questao">
+      <div class="questao-id">[0.1.3]</div>
+      <div class="questao-titulo">CNPJ</div>
+      <div class="questao-descricao">Qual é o número do CNPJ?</div>
+      <input type="text" class="questao-input" placeholder="XX.XXX.XXX/XXXX-XX">
+      <div class="questao-status nao-respondida">⊘ Não respondido</div>
+    </div>
+
+    <!-- Q4 COM GATILHO -->
+    <div class="questao respondida">
+      <div class="questao-id">[0.3.2]</div>
+      <div class="questao-titulo">Quebra por Vínculo</div>
+      <div class="questao-descricao">Preencha a matriz indicando quantos colaboradores há em cada tipo de vínculo:</div>
+
+      <table class="questao-matriz">
+        <thead>
+          <tr>
+            <th>Tipo de Vínculo</th>
+            <th style="width: 80px;">Qtd</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CLT efetivos</td>
+            <td><input type="number" value="30"></td>
+          </tr>
+          <tr>
+            <td>Em experiência</td>
+            <td><input type="number" value="3"></td>
+          </tr>
+          <tr>
+            <td>Estagiários</td>
+            <td><input type="number" value="2"></td>
+          </tr>
+          <tr>
+            <td>Aprendizes</td>
+            <td><input type="number" value="0"></td>
+          </tr>
+          <tr>
+            <td>Temporários</td>
+            <td><input type="number" value="0"></td>
+          </tr>
+          <tr>
+            <td>PJ / autônomos</td>
+            <td><input type="number" value="5"></td>
+          </tr>
+          <tr>
+            <td>Terceirizados</td>
+            <td><input type="number" value="5"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="gatilho-alerta">
+        <p><strong>⚠️ Gatilho Detectado:</strong> Estagiários > 0</p>
+        <p>→ Será aberto bloco de perguntas sobre <strong>Lei 11.788/2008</strong> (regulamentação do estágio) no Módulo B · Regimento Interno</p>
+      </div>
+
+      <div class="questao-status respondida">✓ Respondido</div>
+    </div>
+
+    <!-- Q5 COM RADIO -->
+    <div class="questao respondida">
+      <div class="questao-id">[0.3.6]</div>
+      <div class="questao-titulo">Regime de Trabalho Predominante</div>
+      <div class="questao-descricao">Qual é o regime de trabalho predominante na empresa?</div>
+
+      <div class="opcoes-radio">
+        <div class="opcao-radio">
+          <input type="radio" id="presencial" name="regime" value="presencial">
+          <label for="presencial">Presencial</label>
+        </div>
+        <div class="opcao-radio">
+          <input type="radio" id="hibrido" name="regime" value="hibrido" checked>
+          <label for="hibrido">Híbrido</label>
+        </div>
+        <div class="opcao-radio">
+          <input type="radio" id="remoto" name="regime" value="remoto">
+          <label for="remoto">Remoto (100%)</label>
+        </div>
+      </div>
+
+      <div class="gatilho-alerta">
+        <p><strong>💡 Regime Híbrido/Remoto Detectado:</strong></p>
+        <p>→ Será aberto bloco de perguntas sobre <strong>Teletrabalho e Home Office</strong> na Etapa 2 · Módulo C · Políticas Internas</p>
+      </div>
+
+      <div class="questao-status respondida">✓ Respondido</div>
+    </div>
+
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="buttons-section">
+    <button class="btn btn-anterior">◀ ANTERIOR</button>
+    <button class="btn btn-proximo">PRÓXIMO ▶</button>
+    <button class="btn btn-salvar">SALVAR E SAIR</button>
+  </div>
+
+</div>
+
+</body>
+</html>

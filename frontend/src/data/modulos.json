@@ -1,0 +1,200 @@
+{
+  "modulo_a": {
+    "titulo": "Módulo A - Código de Conduta",
+    "total_perguntas": 26,
+    "secoes": [
+      {
+        "numero": "A.1",
+        "titulo": "Aprofundamento de Identidade",
+        "perguntas": [
+          {"id": "A.1.1", "titulo": "Valores: descrição prática", "tipo": "aberta"},
+          {"id": "A.1.2", "titulo": "Missão (frase oficial)", "tipo": "aberta"},
+          {"id": "A.1.3", "titulo": "Causa social/ambiental?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "A.2",
+        "titulo": "Stakeholders e Dilemas Éticos",
+        "perguntas": [
+          {"id": "A.2.1", "titulo": "Públicos relevantes", "tipo": "multipla", "opcoes": ["Colaboradores", "Clientes", "Fornecedores", "Concorrentes", "Governo", "Investidores", "Comunidade"]},
+          {"id": "A.2.2", "titulo": "Dilemas por stakeholder", "tipo": "matriz"},
+          {"id": "A.2.3", "titulo": "Relação com agentes públicos a regular?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "A.3",
+        "titulo": "Compromissos por Stakeholder",
+        "perguntas": [
+          {"id": "A.3.1", "titulo": "Compromisso: Pessoas (assédio/discriminação)", "tipo": "aberta"},
+          {"id": "A.3.2", "titulo": "Compromisso: Desenvolvimento e segurança", "tipo": "aberta"},
+          {"id": "A.3.3", "titulo": "Compromisso: Clientes", "tipo": "aberta"},
+          {"id": "A.3.4", "titulo": "Compromisso: Fornecedores", "tipo": "aberta"},
+          {"id": "A.3.5", "titulo": "Compromisso: Patrimônio", "tipo": "aberta"},
+          {"id": "A.3.6", "titulo": "Compromisso: Sociedade/Ambiente", "tipo": "aberta"}
+        ]
+      },
+      {
+        "numero": "A.4",
+        "titulo": "Temas Éticos Sensíveis",
+        "perguntas": [
+          {"id": "A.4.1", "titulo": "Política de brindes: limite de valor?", "tipo": "aberta"},
+          {"id": "A.4.2", "titulo": "Como declarar conflito de interesse?", "tipo": "aberta"},
+          {"id": "A.4.3", "titulo": "Postura anticorrupção/antissuborno", "tipo": "sim_nao"},
+          {"id": "A.4.4", "titulo": "Confidencialidade pós-desligamento", "tipo": "sim_nao"},
+          {"id": "A.4.5", "titulo": "Regras de redes sociais/imagem", "tipo": "aberta"},
+          {"id": "A.4.6", "titulo": "Diversidade e inclusão formal?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "A.5",
+        "titulo": "Governança da Ética",
+        "perguntas": [
+          {"id": "A.5.1", "titulo": "Formato do canal de denúncias", "tipo": "escolha", "opcoes": ["E-mail", "Portal terceirizado", "Telefone", "Ouvidoria interna"]},
+          {"id": "A.5.2", "titulo": "Quem apura as denúncias?", "tipo": "aberta"},
+          {"id": "A.5.3", "titulo": "Comitê de Ética? Composição?", "tipo": "aberta"},
+          {"id": "A.5.4", "titulo": "Garantia de não retaliação?", "tipo": "sim_nao"},
+          {"id": "A.5.5", "titulo": "Signatário da Mensagem da Liderança", "tipo": "aberta"}
+        ]
+      },
+      {
+        "numero": "A.6",
+        "titulo": "Ciclo de Vida e Integração",
+        "perguntas": [
+          {"id": "A.6.1", "titulo": "Periodicidade de revisão", "tipo": "escolha", "opcoes": ["Anual", "Bienal"]},
+          {"id": "A.6.2", "titulo": "Referenciar Regimento e Políticas?", "tipo": "sim_nao"},
+          {"id": "A.6.3", "titulo": "Responsável pela aprovação final", "tipo": "aberta"}
+        ]
+      }
+    ]
+  },
+  "modulo_b": {
+    "titulo": "Módulo B - Regimento Interno",
+    "total_perguntas": 38,
+    "secoes": [
+      {
+        "numero": "B.1",
+        "titulo": "Admissão e Contrato",
+        "perguntas": [
+          {"id": "B.1.1", "titulo": "Documentos exigidos na admissão", "tipo": "multipla"},
+          {"id": "B.1.2", "titulo": "Período de experiência?", "tipo": "escolha", "opcoes": ["Não", "30+30 dias", "45+45 dias", "90 dias"]},
+          {"id": "B.1.3", "titulo": "Termo de ciência na admissão?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "B.2",
+        "titulo": "Jornada de Trabalho",
+        "perguntas": [
+          {"id": "B.2.1", "titulo": "Jornada diária/semanal padrão", "tipo": "numero"},
+          {"id": "B.2.2", "titulo": "Horário: início e término", "tipo": "aberta"},
+          {"id": "B.2.3", "titulo": "Intervalo intrajornada", "tipo": "aberta"},
+          {"id": "B.2.4", "titulo": "Forma de controle de ponto", "tipo": "escolha", "opcoes": ["Eletrônico", "App", "Manual", "Não há"]},
+          {"id": "B.2.5", "titulo": "Banco de horas? Regra?", "tipo": "sim_nao"},
+          {"id": "B.2.6", "titulo": "Horas extras exigem autorização?", "tipo": "sim_nao"},
+          {"id": "B.2.7", "titulo": "Escalas/turnos?", "tipo": "aberta"},
+          {"id": "B.2.8", "titulo": "Adicionais aplicáveis", "tipo": "multipla", "opcoes": ["Noturno", "Insalubridade", "Periculosidade", "Sobreaviso"]}
+        ]
+      },
+      {
+        "numero": "B.3",
+        "titulo": "Direitos, Deveres e Proibições",
+        "perguntas": [
+          {"id": "B.3.1", "titulo": "Deveres essenciais", "tipo": "multipla"},
+          {"id": "B.3.2", "titulo": "Direitos reforçados", "tipo": "multipla"},
+          {"id": "B.3.3", "titulo": "Condutas vedadas/proibições", "tipo": "multipla", "opcoes": ["Álcool/ilícitos", "Armas", "Jogos", "Vendas pessoais", "Conteúdo impróprio", "Outras"]},
+          {"id": "B.3.4", "titulo": "Código de vestimenta?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "B.4",
+        "titulo": "Ausências, Atrasos e Atestados",
+        "perguntas": [
+          {"id": "B.4.1", "titulo": "Prazo para atestado", "tipo": "escolha", "opcoes": ["24h", "48h", "72h"]},
+          {"id": "B.4.2", "titulo": "Fluxo de justificativa", "tipo": "aberta"},
+          {"id": "B.4.3", "titulo": "Desconto DSR em falta injustificada?", "tipo": "sim_nao"},
+          {"id": "B.4.4", "titulo": "Tolerância de atraso?", "tipo": "numero"}
+        ]
+      },
+      {
+        "numero": "B.5",
+        "titulo": "Uso de Ativos e Segurança",
+        "perguntas": [
+          {"id": "B.5.1", "titulo": "Equipamentos fornecidos", "tipo": "multipla"},
+          {"id": "B.5.2", "titulo": "Regras de e-mail/internet/sistemas", "tipo": "aberta"},
+          {"id": "B.5.3", "titulo": "Política de senhas/segurança?", "tipo": "sim_nao"},
+          {"id": "B.5.4", "titulo": "Regras de redes sociais no trabalho", "tipo": "aberta"},
+          {"id": "B.5.5", "titulo": "Ativos remotos (se home office)", "tipo": "aberta"}
+        ]
+      },
+      {
+        "numero": "B.6",
+        "titulo": "Saúde e Segurança do Trabalho",
+        "perguntas": [
+          {"id": "B.6.1", "titulo": "EPIs obrigatórios", "tipo": "matriz"},
+          {"id": "B.6.2", "titulo": "Controle de entrega de EPI?", "tipo": "sim_nao"},
+          {"id": "B.6.3", "titulo": "Procedimento em caso de acidente", "tipo": "aberta"},
+          {"id": "B.6.4", "titulo": "CIPA / SESMT?", "tipo": "sim_nao"},
+          {"id": "B.6.5", "titulo": "Treinamentos de segurança periódicos?", "tipo": "sim_nao"}
+        ]
+      },
+      {
+        "numero": "B.7",
+        "titulo": "Regime Disciplinar",
+        "perguntas": [
+          {"id": "B.7.1", "titulo": "Gradação de penas", "tipo": "aberta"},
+          {"id": "B.7.2", "titulo": "Listar hipóteses do Art. 482?", "tipo": "sim_nao"},
+          {"id": "B.7.3", "titulo": "Critérios de proporcionalidade", "tipo": "aberta"}
+        ]
+      },
+      {
+        "numero": "B.8",
+        "titulo": "Módulos Específicos",
+        "perguntas": [
+          {"id": "B.8.1", "titulo": "Reembolso/veículo/prestação contas", "tipo": "aberta"},
+          {"id": "B.8.2", "titulo": "Home office: elegibilidade e ajuda", "tipo": "aberta"},
+          {"id": "B.8.3", "titulo": "Outros temas operacionais críticos", "tipo": "aberta"}
+        ]
+      },
+      {
+        "numero": "B.9",
+        "titulo": "Encerramento",
+        "perguntas": [
+          {"id": "B.9.1", "titulo": "Responsável por casos omissos", "tipo": "escolha", "opcoes": ["Diretoria", "RH"]},
+          {"id": "B.9.2", "titulo": "Responsável pela atualização", "tipo": "aberta"},
+          {"id": "B.9.3", "titulo": "Data de vigência", "tipo": "data"}
+        ]
+      }
+    ]
+  },
+  "modulo_c": {
+    "titulo": "Módulo C - Políticas Internas",
+    "total_perguntas": 13,
+    "secoes": [
+      {
+        "numero": "C.1",
+        "titulo": "Mapeamento e Priorização de Risco",
+        "perguntas": [
+          {"id": "C.1.1", "titulo": "Liste riscos que ameaçam a empresa", "tipo": "multipla"},
+          {"id": "C.1.2", "titulo": "Matriz de Impacto x Probabilidade", "tipo": "matriz"},
+          {"id": "C.1.3", "titulo": "Ranking de políticas (automático)", "tipo": "readonly"},
+          {"id": "C.1.4", "titulo": "Confirme políticas a criar", "tipo": "multipla", "opcoes": ["LGPD", "Assédio", "Home Office", "TI/Segurança", "Brindes", "Anticorrupção", "Conflito Interesse", "Reembolso", "SST", "Diversidade", "Canal Denúncias", "Viagens"]}
+        ]
+      },
+      {
+        "numero": "C.2",
+        "titulo": "Universal por Política (repete-se)",
+        "perguntas": [
+          {"id": "C.2.1", "titulo": "Objetivo da política", "tipo": "aberta"},
+          {"id": "C.2.2", "titulo": "Abrangência (a quem aplica)", "tipo": "multipla"},
+          {"id": "C.2.3", "titulo": "Definições/jargões", "tipo": "aberta"},
+          {"id": "C.2.4", "titulo": "Diretrizes e passo a passo", "tipo": "aberta"},
+          {"id": "C.2.5", "titulo": "Faça / Não faça", "tipo": "matriz"},
+          {"id": "C.2.6", "titulo": "Papéis e responsabilidades", "tipo": "matriz"},
+          {"id": "C.2.7", "titulo": "Consequência do descumprimento", "tipo": "aberta"},
+          {"id": "C.2.8", "titulo": "Requisitos legais", "tipo": "multipla"},
+          {"id": "C.2.9", "titulo": "KPIs de eficácia", "tipo": "multipla"},
+          {"id": "C.2.10", "titulo": "Vigência e revisão", "tipo": "data"}
+        ]
+      }
+    ]
+  }
+}
