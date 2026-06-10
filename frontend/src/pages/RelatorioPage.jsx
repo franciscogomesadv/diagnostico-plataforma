@@ -53,6 +53,90 @@ export default function RelatorioPage() {
     }
   }
 
+  const exportarJSON = () => {
+    const dados = {
+      diagnostico: diagnostico,
+      data_exportacao: new Date().toISOString(),
+      respostas: respostas,
+      maturidade: maturidadeData,
+      riscos: riscoData
+    }
+
+    const jsonString = JSON.stringify(dados, null, 2)
+    const blob = new Blob([jsonString], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `diagnostico-${diagnosticoId}-${new Date().toISOString().split('T')[0]}.json`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
+  const exportarMarkdown = () => {
+    let md = `# Relatório de Diagnóstico\n\n`
+    md += `**Data:** ${new Date().toLocaleString('pt-BR')}\n`
+    md += `**Diagnóstico ID:** ${diagnosticoId}\n\n`
+
+    if (diagnostico) {
+      md += `## Informações do Diagnóstico\n\n`
+      md += `- **Status:** ${diagnostico.etapa_atual}\n`
+      md += `- **Progresso:** ${diagnostico.progresso}%\n`
+      md += `- **Data Início:** ${diagnostico.data_inicio}\n`
+      md += `- **Módulos:** ${diagnostico.modulos_solicitados?.join(', ') || 'N/A'}\n\n`
+    }
+
+    if (respostas.length > 0) {
+      md += `## Respostas Coletadas\n\n`
+      md += `**Total:** ${respostas.length} resposta(s)\n\n`
+
+      // Agrupar por pergunta
+      const respostasAgrupadas = {}
+      respostas.forEach(r => {
+        if (!respostasAgrupadas[r.pergunta_id]) {
+          respostasAgrupadas[r.pergunta_id] = []
+        }
+        respostasAgrupadas[r.pergunta_id].push(r)
+      })
+
+      Object.entries(respostasAgrupadas).forEach(([perguntaId, resps]) => {
+        md += `### Pergunta ${perguntaId}\n\n`
+        resps.forEach((r, idx) => {
+          md += `**Resposta ${idx + 1}:**\n\`\`\`\n${r.resposta_valor}\n\`\`\`\n\n`
+        })
+      })
+    }
+
+    md += `## Métricas de Maturidade\n\n`
+    md += `| Aspecto | Valor |\n`
+    md += `|--------|-------|\n`
+    maturidadeData.forEach(item => {
+      md += `| ${item.name} | ${item.value}% |\n`
+    })
+    md += `\n`
+
+    md += `## Análise de Riscos\n\n`
+    md += `| Risco | Score |\n`
+    md += `|-------|-------|\n`
+    riscoData.forEach(item => {
+      md += `| ${item.name} | ${item.value}% |\n`
+    })
+    md += `\n`
+
+    md += `---\n\n*Relatório gerado automaticamente pela plataforma Francisco Gomes Advocacia*`
+
+    const blob = new Blob([md], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `diagnostico-${diagnosticoId}-${new Date().toISOString().split('T')[0]}.md`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
   // Paleta tonal refinada (marinho → âmbar → taupe), sem cores primárias
   const maturidadeData = [
     { name: 'Código de Conduta', value: 72, fill: '#1B2A4A' },
@@ -94,13 +178,13 @@ export default function RelatorioPage() {
             {/* Botões Premium */}
             <div className="flex gap-3">
               <button
-                onClick={() => alert('JSON exportado')}
+                onClick={exportarJSON}
                 className="px-6 py-3 bg-[#C9A84C] text-white rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#B8971F] transition-all shadow-sm hover:shadow-md"
               >
                 Exportar JSON
               </button>
               <button
-                onClick={() => alert('MD exportado')}
+                onClick={exportarMarkdown}
                 className="px-6 py-3 bg-[#1B2A4A] text-white rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#0F1929] transition-all shadow-sm hover:shadow-md"
               >
                 Exportar MD
