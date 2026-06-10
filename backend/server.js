@@ -6,6 +6,7 @@ import clientesRoutes from './routes/clientes.js';
 import diagnosticosRoutes from './routes/diagnosticos.js';
 import respostasRoutes from './routes/respostas.js';
 import compartilhadoRoutes from './routes/compartilhado.js';
+import geradoresRoutes from './routes/geradores.js';
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use('/api/clientes', clientesRoutes);
 app.use('/api/diagnosticos', diagnosticosRoutes);
 app.use('/api/respostas', respostasRoutes);
 app.use('/api/compartilhado', compartilhadoRoutes);
+app.use('/api/geradores', geradoresRoutes);
 
 // 404 handler
 app.use((req, res) => {

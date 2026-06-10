@@ -10,6 +10,9 @@ export default function DashboardPage() {
   const [showCompartilhadoModal, setShowCompartilhadoModal] = useState(false)
   const [compartilhadoData, setCompartilhadoData] = useState(null)
   const [gerandoLink, setGerandoLink] = useState(false)
+  const [gerandoDocumentos, setGerandoDocumentos] = useState(false)
+  const [showDocumentosModal, setShowDocumentosModal] = useState(false)
+  const [documentosGerados, setDocumentosGerados] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -110,6 +113,29 @@ export default function DashboardPage() {
 
   const copiarParaClipboard = (texto) => {
     navigator.clipboard.writeText(texto)
+  }
+
+  const handleGerarDocumentos = async (diagnosticoId) => {
+    setGerandoDocumentos(true)
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/geradores/gerar/${diagnosticoId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      const data = await response.json()
+      if (data.success) {
+        setDocumentosGerados(data.documentos)
+        setShowDocumentosModal(true)
+      }
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setGerandoDocumentos(false)
+    }
   }
 
   if (loading) {
@@ -216,6 +242,14 @@ export default function DashboardPage() {
                           >
                             {gerandoLink ? '⏳' : '🔗'}
                           </button>
+                          <button
+                            onClick={() => handleGerarDocumentos(diag.id)}
+                            disabled={gerandoDocumentos}
+                            className="px-5 py-2.5 bg-transparent text-[#1B2A4A] text-xs uppercase tracking-wider rounded-[8px] font-sans font-[500] border border-[#1B2A4A] hover:bg-[#1B2A4A] hover:text-white transition-all disabled:opacity-50"
+                            title="Gerar Código, Regimento e Políticas"
+                          >
+                            {gerandoDocumentos ? '⏳' : '📄'}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -234,6 +268,75 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        {/* Modal de Documentos Gerados */}
+        {showDocumentosModal && documentosGerados && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white bg-opacity-70 backdrop-blur-[12px] border border-[#E0DDD8] border-opacity-60 rounded-[12px] shadow-lg p-8 max-w-md w-full">
+              <h3 className="text-xl font-serif font-[400] text-[#1B2A4A] mb-6">Documentos Gerados</h3>
+
+              <div className="space-y-4 mb-6">
+                {/* Código de Conduta */}
+                <div className="border border-[#E0DDD8] rounded-[8px] p-4 hover:bg-[#F9F8F5] transition-colors">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <p className="font-serif font-[400] text-[#1B2A4A]">{documentosGerados.codigo_conduta.titulo}</p>
+                      <p className="text-xs text-[#8a8a8a] mt-1">{(documentosGerados.codigo_conduta.bytes / 1024).toFixed(0)} KB</p>
+                    </div>
+                  </div>
+                  <a
+                    href={documentosGerados.codigo_conduta.url}
+                    className="inline-block px-4 py-2 bg-[#1B2A4A] text-white rounded-[6px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#0F1929] transition-all"
+                  >
+                    Baixar
+                  </a>
+                </div>
+
+                {/* Regimento Interno */}
+                <div className="border border-[#E0DDD8] rounded-[8px] p-4 hover:bg-[#F9F8F5] transition-colors">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <p className="font-serif font-[400] text-[#1B2A4A]">{documentosGerados.regimento_interno.titulo}</p>
+                      <p className="text-xs text-[#8a8a8a] mt-1">{(documentosGerados.regimento_interno.bytes / 1024).toFixed(0)} KB</p>
+                    </div>
+                  </div>
+                  <a
+                    href={documentosGerados.regimento_interno.url}
+                    className="inline-block px-4 py-2 bg-[#1B2A4A] text-white rounded-[6px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#0F1929] transition-all"
+                  >
+                    Baixar
+                  </a>
+                </div>
+
+                {/* Políticas Internas */}
+                <div className="border border-[#E0DDD8] rounded-[8px] p-4 hover:bg-[#F9F8F5] transition-colors">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <p className="font-serif font-[400] text-[#1B2A4A]">{documentosGerados.politicas_internas.titulo}</p>
+                      <p className="text-xs text-[#8a8a8a] mt-1">{(documentosGerados.politicas_internas.bytes / 1024).toFixed(0)} KB</p>
+                    </div>
+                  </div>
+                  <a
+                    href={documentosGerados.politicas_internas.url}
+                    className="inline-block px-4 py-2 bg-[#1B2A4A] text-white rounded-[6px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#0F1929] transition-all"
+                  >
+                    Baixar
+                  </a>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setShowDocumentosModal(false)
+                  setDocumentosGerados(null)
+                }}
+                className="w-full px-6 py-2.5 bg-[#F0EDE8] text-[#1B2A4A] rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#E0DDD8] transition-all"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Modal de Compartilhamento */}
         {showCompartilhadoModal && compartilhadoData && (
