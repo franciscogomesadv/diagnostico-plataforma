@@ -33,7 +33,17 @@ router.post('/gerar-link', (req, res) => {
   compartilhamentos.push(compartilhamento);
 
   const link = `https://diagnostico-plataforma.vercel.app/responder/${token}`;
-  const mensagem_whatsapp = `Olá! Preencha o questionário de governança aqui:\n\n${link}\n\nVálido por 48 horas.`;
+
+  // Formatar data/hora de expiração em português (Brasil)
+  const dataExpiracao = expira_em.toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  const mensagem_whatsapp = `Olá!\n\nEstamos desenvolvendo um diagnóstico exclusivo de governança documental para sua empresa.\n\nSua participação é fundamental para identificarmos oportunidades de melhoria.\n\n👉 Clique aqui para participar:\n${link}\n\n⏳ Válido até ${dataExpiracao}\n\nObrigado por contribuir! 🙏`;
 
   res.json({
     success: true,
