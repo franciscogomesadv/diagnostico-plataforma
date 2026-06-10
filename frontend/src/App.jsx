@@ -8,6 +8,7 @@ import ModuloCodePage from './pages/ModuloCodePage'
 import ModuloRegimentoPage from './pages/ModuloRegimentoPage'
 import ModuloPoliticasPage from './pages/ModuloPoliticasPage'
 import ModuloSelectorPage from './pages/ModuloSelectorPage'
+import ResponderDiagnosticoPage from './pages/ResponderDiagnosticoPage'
 import Header from './components/Header'
 
 function App() {
@@ -86,6 +87,10 @@ function App() {
           <Route
             path="/relatorio/:diagnosticoId"
             element={isAuthenticated ? <RelatorioPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/responder/:token"
+            element={<ResponderDiagnosticoPage />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

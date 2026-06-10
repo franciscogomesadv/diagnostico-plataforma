@@ -7,6 +7,9 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [showNewClienteForm, setShowNewClienteForm] = useState(false)
   const [novoCliente, setNovoCliente] = useState({ nome_empresa: '', email_responsavel: '' })
+  const [showCompartilhadoModal, setShowCompartilhadoModal] = useState(false)
+  const [compartilhadoData, setCompartilhadoData] = useState(null)
+  const [gerandoLink, setGerandoLink] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -79,6 +82,34 @@ export default function DashboardPage() {
     } catch (err) {
       console.error(err)
     }
+  }
+
+  const handleGerarLinkCompartilhado = async (diagnosticoId) => {
+    setGerandoLink(true)
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/compartilhado/gerar-link`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ diagnostico_id: diagnosticoId })
+      })
+      const data = await response.json()
+      if (data.success) {
+        setCompartilhadoData(data)
+        setShowCompartilhadoModal(true)
+      }
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setGerandoLink(false)
+    }
+  }
+
+  const copiarParaClipboard = (texto) => {
+    navigator.clipboard.writeText(texto)
   }
 
   if (loading) {
@@ -177,6 +208,14 @@ export default function DashboardPage() {
                           >
                             Relatório
                           </button>
+                          <button
+                            onClick={() => handleGerarLinkCompartilhado(diag.id)}
+                            disabled={gerandoLink}
+                            className="px-5 py-2.5 bg-transparent text-[#C9A84C] text-xs uppercase tracking-wider rounded-[8px] font-sans font-[500] border border-[#C9A84C] hover:bg-[#C9A84C] hover:text-white transition-all disabled:opacity-50"
+                            title="Gerar link para cliente preencher respostas"
+                          >
+                            {gerandoLink ? '⏳' : '🔗'}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -195,6 +234,74 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        {/* Modal de Compartilhamento */}
+        {showCompartilhadoModal && compartilhadoData && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white bg-opacity-70 backdrop-blur-[12px] border border-[#E0DDD8] border-opacity-60 rounded-[12px] shadow-lg p-8 max-w-md w-full">
+              <h3 className="text-xl font-serif font-[400] text-[#1B2A4A] mb-6">Link de Compartilhamento</h3>
+
+              <div className="space-y-4 mb-6">
+                {/* Link */}
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#8a8a8a] font-sans font-[400] mb-2">
+                    Link para Compartilhar
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={compartilhadoData.link}
+                      readOnly
+                      className="flex-1 px-4 py-3 border border-[#E0DDD8] rounded-[8px] bg-[#F9F8F5] font-serif font-[300] text-sm"
+                    />
+                    <button
+                      onClick={() => copiarParaClipboard(compartilhadoData.link)}
+                      className="px-4 py-3 bg-[#C9A84C] text-white rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#B8971F] transition-all"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mensagem WhatsApp */}
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#8a8a8a] font-sans font-[400] mb-2">
+                    Mensagem para WhatsApp
+                  </label>
+                  <textarea
+                    value={compartilhadoData.mensagem_whatsapp}
+                    readOnly
+                    className="w-full px-4 py-3 border border-[#E0DDD8] rounded-[8px] bg-[#F9F8F5] font-serif font-[300] text-sm resize-none"
+                    rows="5"
+                  />
+                  <button
+                    onClick={() => copiarParaClipboard(compartilhadoData.mensagem_whatsapp)}
+                    className="w-full mt-2 px-4 py-2 bg-[#25D366] text-white rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#1BA653] transition-all"
+                  >
+                    Copiar Mensagem WhatsApp
+                  </button>
+                </div>
+
+                {/* Validade */}
+                <div className="bg-[#F9F8F5] p-3 rounded-[8px]">
+                  <p className="text-xs font-sans font-[300] text-[#8a8a8a]">
+                    <strong>Válido até:</strong> {new Date(compartilhadoData.expira_em).toLocaleString('pt-BR')}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setShowCompartilhadoModal(false)
+                  setCompartilhadoData(null)
+                }}
+                className="w-full px-6 py-2.5 bg-[#F0EDE8] text-[#1B2A4A] rounded-[8px] font-sans font-[500] text-xs uppercase tracking-wider hover:bg-[#E0DDD8] transition-all"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
